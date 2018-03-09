@@ -27,5 +27,3 @@ All rights reserved
 Accepting donation
 
 Thanks!
-
-Pau
