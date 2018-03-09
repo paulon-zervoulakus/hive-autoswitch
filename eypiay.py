@@ -8,6 +8,7 @@ Hive OS API usage example
 Install curl:
 easy_install pycurl
 pip install pycurl
+pip install certifi
 '''
 
 import pycurl
@@ -310,17 +311,9 @@ class WhatToMine:
                 self.run()
                 
             sleep(INTERVAL)
-        
        
-    """
-    def run(self):
-        self.__log("=== Autoswitch Miner for Hiveos ===")
-        most_profitable = {}
-        most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
-                
-        if most_profitable is not None:        
-            self.applyChanges(most_profitable)
-        """
+       
+    
 w = WhatToMine()
 w.run()
 
