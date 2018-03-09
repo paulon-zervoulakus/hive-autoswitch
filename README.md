@@ -17,7 +17,7 @@ Goto whattomine and tweak most profitable for your rig
 
 get your secret and public key from hive
 
-fill in the config rig_ids with your rig_id from hive
+fill in the config rig_ids with your rig_id from hive. NOTE: your wallet name should match the name result from whattomine json response
 
 #Step 3: start your application
 
