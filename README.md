@@ -6,7 +6,6 @@ Install the requirements below
 #Step 1 : requirements
 easy_install pycurl
 pip install pycurl
-pip install request
 pip install certifi
 
 #Step 2: Config
