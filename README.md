@@ -5,9 +5,7 @@ Install the requirements below
 
 #Step 1 : requirements
 
-easy_install pycurl
-
-pip install pycurl
+apt-get install python-dev
 
 pip install certifi
 
