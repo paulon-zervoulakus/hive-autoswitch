@@ -9,6 +9,8 @@ apt-get install python-dev
 
 pip install certifi
 
+pip install logging
+
 #Step 2: Config
 
 Goto whattomine and tweak most profitable for your rig
