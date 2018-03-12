@@ -6,13 +6,14 @@
 Hive OS API usage example
 
 Install curl:
-easy_install pycurl
-pip install pycurl
+apt-get install python-dev
 pip install certifi
+pip install logging
 '''
 
 import pycurl
 import sys
+import os
 import datetime
 import urllib
 import urllib2
@@ -23,6 +24,10 @@ import json
 import certifi
 from CONFIG import *
 from time import sleep
+import logging
+LOG_FILENAME = 'autoswitch.log'
+os.remove(LOG_FILENAME)
+logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 argv = sys.argv
 argc = len(sys.argv)
@@ -275,7 +280,7 @@ class WhatToMine:
         wallet_id = null
         coin_name = ""
         
-        for key, val in wallets.items():            
+        for key, val in wallets.items():           
             if list(most_profitable.keys())[0] == val["name"]:                
                 wallet_id = val["id_wal"]
                 coin_name = val["name"]
@@ -291,29 +296,41 @@ class WhatToMine:
             return True
         else:
             return False
-            
-   
+	
+    def checkExistingProcess(self):
+        return os.getpid()		
+	
     def loop(self):
+	pid = self.checkExistingProcess()
+	self.__log("\nPID:" + str(pid))
+		
         most_profitable = {}
         most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         success = False
-        
+	print json.dumps(most_profitable, indent=3)        
+
         if most_profitable is not None:        
             success = self.applyChanges(most_profitable)
+
+        if success:
+            logging.debug('Process ID: ' + str(pid))
+            logging.debug('Date Time: ' + str(datetime.datetime.today()))
+            logging.debug('Data:\n' + json.dumps(most_profitable, indent=3))
             
         return success
+    
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         
-        while True:
-            if not self.loop():
-                sleep(5)
-                self.run()
-                
-            sleep(INTERVAL)
-       
-       
-    
+        while not self.loop():
+            sleep(5)
+            self.run()
+            counter += 1
+            if counter == retry_limit:
+                break
+            
+counter = 0
+retry_limit = 5
 w = WhatToMine()
 w.run()
 
