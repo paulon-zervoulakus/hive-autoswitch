@@ -125,7 +125,7 @@ class HiveAPI:
 
             curl.close()
 
-        except ValueError:
+        except pycurl.error:
             print "Oops!  That was no valid request..."
             response = "Something went wrong with the request"
             http_code = null
