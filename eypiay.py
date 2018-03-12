@@ -279,14 +279,15 @@ class WhatToMine:
         wallet_id = null
         coin_name = ""
         
-        for key, val in wallets.items():            
+        for key, val in wallets.items():
+            print json.dumps(val, indent=3)
             if list(most_profitable.keys())[0] == val["name"]:                
                 wallet_id = val["id_wal"]
                 coin_name = val["name"]
 
         if wallet_id > 0:
             #Uncomment below line to apply changes to your hiveos farm
-            hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+            #hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
             
             print "Changes has been applied."
             print "Miner will now dig " + coin_name
