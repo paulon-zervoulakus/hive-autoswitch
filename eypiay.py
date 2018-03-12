@@ -314,6 +314,7 @@ class WhatToMine:
 
         if success:
             logging.debug('Process ID: ' + str(pid))
+            logging.debug('Date Time: ' + str(datetime.datetime.today()))
             logging.debug('Data:\n' + json.dumps(most_profitable, indent=3))
             
         return success
