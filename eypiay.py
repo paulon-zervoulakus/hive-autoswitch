@@ -26,6 +26,7 @@ from CONFIG import *
 from time import sleep
 import logging
 LOG_FILENAME = 'autoswitch.log'
+os.remove(LOG_FILENAME)
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 argv = sys.argv
@@ -278,20 +279,15 @@ class WhatToMine:
         wallets = hive_api.getWallets()
         wallet_id = null
         coin_name = ""
-
-        print "=================DEBUGING===================="
-        print json.dumps(hive_api.getRigs(), indent=3)
-        print "=================END DEBUG===================="
         
-        for key, val in wallets.items():
-           
+        for key, val in wallets.items():           
             if list(most_profitable.keys())[0] == val["name"]:                
                 wallet_id = val["id_wal"]
                 coin_name = val["name"]
 
         if wallet_id > 0:
             #Uncomment below line to apply changes to your hiveos farm
-            #hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+            hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
             
             print "Changes has been applied."
             print "Miner will now dig " + coin_name
