@@ -292,14 +292,14 @@ class WhatToMine:
             return True
         else:
             return False
-	
-	def checkExistingProcess(self):
-		return os.getpid()
+
+def checkExistingProcess(self):
+	return os.getpid()
 		
 	
     def loop(self):
-		pid = self.checkExistingProcess()
-		self.__log("\nPID:" + pid)
+	pid = self.checkExistingProcess()
+	self.__log("\nPID:" + pid)
 		
         most_profitable = {}
         most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
