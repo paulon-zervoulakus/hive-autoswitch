@@ -298,7 +298,7 @@ class WhatToMine:
 	
     def loop(self):
 	pid = self.checkExistingProcess()
-	self.__log("\nPID:" + pid)
+	self.__log("\nPID:" + str(pid))
 		
         most_profitable = {}
         most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
