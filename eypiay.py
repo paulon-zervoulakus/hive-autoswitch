@@ -319,6 +319,6 @@ class WhatToMine:
             sleep(INTERVAL)   
 
 w = WhatToMine()
-#w.run()
-w.loop()
+w.run()
+#w.loop()
 
