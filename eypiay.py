@@ -27,8 +27,6 @@ from time import sleep
 import logging
 
 LOG_FILENAME = 'autoswitch.log'
-if os.path.isfile(LOG_FILENAME): 
-    os.remove(LOG_FILENAME)
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 argv = sys.argv
@@ -320,7 +318,7 @@ class WhatToMine:
         if success:
             logging.debug('Process ID: ' + str(pid))
             logging.debug('Date Time: ' + str(datetime.datetime.today()))
-            logging.debug('Data:\n' + json.dumps(most_profitable, indent=3))
+            logging.debug('Coin Switch: ' + list(most_profitable.keys())[0])
             
         return success
     
