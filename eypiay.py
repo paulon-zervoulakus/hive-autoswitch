@@ -283,7 +283,7 @@ class WhatToMine:
 
         if wallet_id > 0:
             #Uncomment below line to apply changes to your hiveos farm
-            #hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+            hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
             
             print "Changes has been applied."
             print "Miner will now dig " + coin_name
@@ -308,17 +308,16 @@ class WhatToMine:
             success = self.applyChanges(most_profitable)
             
         return success
+    
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         
-        while True:
-            if not self.loop():
-                sleep(5)
-                self.run()
-                
-            sleep(INTERVAL)   
+        while not self.loop():
+            sleep(5)
+            self.run()                
+            sleep(INTERVAL)
+            
 
 w = WhatToMine()
 w.run()
-#w.loop()
 
