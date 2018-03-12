@@ -312,7 +312,7 @@ class WhatToMine:
             success = self.applyChanges(most_profitable)
 
         if success:
-            logging.debug('Process ID: ' + pid)
+            logging.debug('Process ID: ' + str(pid))
             logging.debug('Data:\n' + json.dumps(most_profitable, indent=3))
             
         return success
