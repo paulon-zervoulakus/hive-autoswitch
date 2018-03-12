@@ -290,13 +290,16 @@ class WhatToMine:
 
         if wallet_id > 0:
             #Uncomment below line to apply changes to your hiveos farm
-            hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+            result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
             
             print "Changes has been applied."
             print "Miner will now dig " + coin_name
             print "Restarting Miner."
 
-            return True
+            if result is None:
+                return False
+            else:
+                return True
         else:
             return False
 	
