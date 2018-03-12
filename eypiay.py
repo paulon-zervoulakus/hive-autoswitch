@@ -278,11 +278,13 @@ class WhatToMine:
         wallets = hive_api.getWallets()
         wallet_id = null
         coin_name = ""
+
+        print "=================DEBUGING===================="
+        print json.dumps(hive_api.getRigs(), indent=3)
+        print "=================END DEBUG===================="
         
         for key, val in wallets.items():
-            print "=================DEBUGING===================="
-            print json.dumps(val, indent=3)
-            print "=================END DEBUG===================="
+           
             if list(most_profitable.keys())[0] == val["name"]:                
                 wallet_id = val["id_wal"]
                 coin_name = val["name"]
