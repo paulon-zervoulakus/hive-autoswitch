@@ -19,9 +19,9 @@ get your secret and public key from hive
 
 fill in the config rig_ids with your rig_id from hive. NOTE: your wallet name should match the name result from whattomine json response
 
-#Step 3: start your application
+#Step 3: add your application to crontab. The example below will trigger every hour
 
-python eypiay.py
+* 1 * * * /usr/bin/python /hove/user/hiveos/hive-autoswitch/eypiay.py
 
 All rights reserved
 Accepting donation
