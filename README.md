@@ -21,7 +21,7 @@ fill in the config rig_ids with your rig_id from hive. NOTE: your wallet name sh
 
 #Step 3: add your application to crontab. The example below will trigger every hour
 
-* 1 * * * /usr/bin/python /hove/user/hiveos/hive-autoswitch/eypiay.py
+\* 1 * * * /usr/bin/python /hove/user/hiveos/hive-autoswitch/eypiay.py
 
 All rights reserved
 Accepting donation
