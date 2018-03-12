@@ -13,6 +13,7 @@ pip install certifi
 
 import pycurl
 import sys
+import os
 import datetime
 import urllib
 import urllib2
@@ -282,7 +283,7 @@ class WhatToMine:
 
         if wallet_id > 0:
             #Uncomment below line to apply changes to your hiveos farm
-            hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+            #hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
             
             print "Changes has been applied."
             print "Miner will now dig " + coin_name
@@ -291,9 +292,15 @@ class WhatToMine:
             return True
         else:
             return False
-            
-   
+	
+	def checkExistingProcess(self):
+		return os.getpid()
+		
+	
     def loop(self):
+		pid = self.checkExistingProcess()
+		self.__log("\nPID:" + pid)
+		
         most_profitable = {}
         most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         success = False
@@ -310,10 +317,9 @@ class WhatToMine:
                 sleep(5)
                 self.run()
                 
-            sleep(INTERVAL)
-       
-       
-    
+            sleep(INTERVAL)   
+
 w = WhatToMine()
-w.run()
+#w.run()
+w.loop()
 
