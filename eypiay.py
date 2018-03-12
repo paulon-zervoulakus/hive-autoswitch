@@ -319,8 +319,6 @@ class WhatToMine:
     
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
-        counter = 0
-        retry_limit = 5
         
         while not self.loop():
             sleep(5)
@@ -329,7 +327,8 @@ class WhatToMine:
             if counter == retry_limit:
                 break
             
-
+counter = 0
+retry_limit = 5
 w = WhatToMine()
 w.run()
 
