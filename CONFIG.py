@@ -1,6 +1,6 @@
-SECRET_KEY = ''
-PUBLIC_KEY = ''
-INTERVAL = 1800 # inteval is in seconds
+SECRET_KEY = '8335ae1323f6bdbc657cd96f5fca9686238fe3dce7c283f59ab2de0863d144d5'
+PUBLIC_KEY = 'aa12dd7b54df03d811c66dbec08f91a9d73a47369ab042262b96f7ba17eb7988'
+INTERVAL = 15 # inteval is in seconds
 
 SOURCE = {
     'whattomine': {
