@@ -26,7 +26,9 @@ from CONFIG import *
 from time import sleep
 import logging
 LOG_FILENAME = 'autoswitch.log'
-os.remove(LOG_FILENAME)
+if os.path.isfile(LOG_FILENAME): 
+	os.remove(LOG_FILENAME)
+
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 argv = sys.argv
