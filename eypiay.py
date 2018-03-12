@@ -306,7 +306,8 @@ class WhatToMine:
         most_profitable = {}
         most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         success = False
-        
+	print json.dumps(most_profitable, indent=3)        
+
         if most_profitable is not None:        
             success = self.applyChanges(most_profitable)
 
@@ -322,7 +323,6 @@ class WhatToMine:
         while not self.loop():
             sleep(5)
             self.run()                
-            sleep(INTERVAL)
             
 
 w = WhatToMine()
