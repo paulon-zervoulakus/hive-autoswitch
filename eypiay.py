@@ -6,9 +6,9 @@
 Hive OS API usage example
 
 Install curl:
-easy_install pycurl
-pip install pycurl
+apt-get install python-dev
 pip install certifi
+pip install logging
 '''
 
 import pycurl
@@ -24,6 +24,9 @@ import json
 import certifi
 from CONFIG import *
 from time import sleep
+import logging
+LOG_FILENAME = 'autoswitch.log'
+logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 argv = sys.argv
 argc = len(sys.argv)
@@ -306,6 +309,10 @@ class WhatToMine:
         
         if most_profitable is not None:        
             success = self.applyChanges(most_profitable)
+
+        if success:
+            logging.debug('Process ID: ' + pid)
+            logging.debug('Data:\n' + json.dumps(most_profitable, indent=3))
             
         return success
     
