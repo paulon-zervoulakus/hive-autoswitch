@@ -240,7 +240,10 @@ class HiveAPI:
 
 
 
-class WhatToMine:   
+class WhatToMine:
+    counter = 0
+    retry_limit = 5
+    
     def __init__(self):
         pass
     
@@ -324,15 +327,13 @@ class WhatToMine:
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         
-        while not self.loop():
+        while not self.loop():            
+            self.counter += 1
+            if self.counter >= self.retry_limit:
+                break
             sleep(5)
             self.run()
-            counter += 1
-            if counter == retry_limit:
-                break
             
-counter = 0
-retry_limit = 5
 w = WhatToMine()
 w.run()
 
