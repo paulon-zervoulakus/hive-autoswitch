@@ -280,7 +280,9 @@ class WhatToMine:
         coin_name = ""
         
         for key, val in wallets.items():
+            print "=================DEBUGING===================="
             print json.dumps(val, indent=3)
+            print "=================END DEBUG===================="
             if list(most_profitable.keys())[0] == val["name"]:                
                 wallet_id = val["id_wal"]
                 coin_name = val["name"]
