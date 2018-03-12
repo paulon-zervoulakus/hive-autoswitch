@@ -292,10 +292,9 @@ class WhatToMine:
             return True
         else:
             return False
-
-def checkExistingProcess(self):
-	return os.getpid()
-		
+	
+    def checkExistingProcess(self):
+        return os.getpid()		
 	
     def loop(self):
 	pid = self.checkExistingProcess()
