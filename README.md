@@ -26,9 +26,11 @@ fill in the config rig_ids with your rig_id from hive. NOTE: your wallet name sh
 #Step 4: file property
 
 chmod a+x eypiay.py
+
 chmod a+x autoswitch.log
 
 All rights reserved
+
 Accepting donation
 
 Thanks!
