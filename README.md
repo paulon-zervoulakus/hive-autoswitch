@@ -23,7 +23,7 @@ fill in the config rig_ids with your rig_id from hive. NOTE: your wallet name sh
 
 0 */1 * * * /usr/bin/python /hove/user/hiveos/hive-autoswitch/eypiay.py
 
-#Step 4: file property
+#Step 4: file permission
 
 chmod a+x eypiay.py
 
