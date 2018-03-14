@@ -26,7 +26,7 @@ from CONFIG import *
 from time import sleep
 import logging
 
-LOG_FILENAME = 'autoswitch.log'
+LOG_FILENAME = '/home/user/hiveos/hive-autoswitch/autoswitch.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 argv = sys.argv
