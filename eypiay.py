@@ -3,7 +3,8 @@
 
 '''
 
-Hive OS API usage example
+Hive-Autoswitch
+Ver. 2.0
 
 Install curl:
 apt-get install python-dev
@@ -241,6 +242,8 @@ class HiveAPI:
 class WhatToMine:
     counter = 0
     retry_limit = 5
+    most_profitable = {}
+    most_profitable_keys = []
     
     def __init__(self):
         pass
@@ -263,7 +266,8 @@ class WhatToMine:
             json_obj = {'coins': {}}
             print ("error")
 
-        return json_obj    
+        return json_obj["coins"]
+    
     def calculateMostProfitable(self, profitable_coins):
         most_profitable = {}
         if len(profitable_coins["coins"]) > 0:
@@ -277,23 +281,45 @@ class WhatToMine:
                         most_profitable[key] = val
         return most_profitable
 
-    def applyChanges(self, most_profitable):
+    def sortProfitableKey(self, profitable_coins):
+        import operator
+        profitable_sorted = {}
+        if len(profitable_coins) > 0:
+            for key, val in profitable_coins.items():
+                profitable_sorted[key] = val[SOURCE["whattomine"]["profitable_key"]]
+
+            x = sorted(profitable_sorted.items(), key=operator.itemgetter(1), reverse=True)    
+                    
+        return x
+   
+    def applyChanges(self):
         hive_api = HiveAPI()
         wallets = hive_api.getWallets()
         wallet_id = null
         coin_name = ""
+        counter = 0
+        result = None
         
-        for key, val in wallets.items():           
-            if list(most_profitable.keys())[0] == val["name"]:                
-                wallet_id = val["id_wal"]
-                coin_name = val["name"]
+        while counter < len(self.most_profitable_keys[0]):
+            for key, val in wallets.items():           
+                if self.most_profitable_keys[counter][0] == val["name"]:                
+                    wallet_id = val["id_wal"]
+                    coin_name = val["name"]
+            counter += 1
 
         if wallet_id > 0:
-            #Uncomment below line to apply changes to your hiveos farm
             result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
-            
+
+            logging.debug('Process ID: ' + str(self.checkExistingProcess()))
+            logging.debug('Date Time: ' + str(datetime.datetime.today()))
+            logging.debug('Coin Switch: ' + coin_name )
+            logging.debug('Rig IDs: ' + SOURCE["whattomine"]["rig_ids"])
+            logging.debug('Wallet ID: ' + str(wallet_id))
+                          
             print "Changes has been applied."
-            print "Miner will now dig " + coin_name
+            print "Miner/s will now dig : " + coin_name
+            print "Wallet ID : " + str(wallet_id)
+            print "Rig ID/s : " + SOURCE["whattomine"]["rig_ids"]
             print "Restarting Miner."
 
             if result is None:
@@ -302,39 +328,23 @@ class WhatToMine:
                 return True
         else:
             return False
-	
     def checkExistingProcess(self):
         return os.getpid()		
-	
-    def loop(self):
-	pid = self.checkExistingProcess()
-	self.__log("\nPID:" + str(pid))
-		
-        most_profitable = {}
-        most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
-        success = False
-	print json.dumps(most_profitable, indent=3)        
-
-        if most_profitable is not None:        
-            success = self.applyChanges(most_profitable)
-
-        if success:
-            logging.debug('Process ID: ' + str(pid))
-            logging.debug('Date Time: ' + str(datetime.datetime.today()))
-            logging.debug('Coin Switch: ' + list(most_profitable.keys())[0])
-            
-        return success
     
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
+        self.most_profitable = self.getProfitableCoins()
+        self.most_profitable_keys = self.sortProfitableKey(self.most_profitable)
         
-        while not self.loop():            
+        #print json.dumps(self.most_profitable_keys, indent = 4)
+        result = self.applyChanges()
+        while not result:            
             self.counter += 1
             if self.counter >= self.retry_limit:
                 break
             sleep(5)
             self.run()
-            
+        
 w = WhatToMine()
 w.run()
 
