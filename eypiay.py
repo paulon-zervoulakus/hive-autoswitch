@@ -285,7 +285,7 @@ class WhatToMine:
                 if len(most_profitable) <= 0:
                     most_profitable[key] = val
                 else:
-                    
+                    break
                     
         return most_profitable
     def applyChanges(self, most_profitable):
