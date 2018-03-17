@@ -329,6 +329,8 @@ class WhatToMine:
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
+        print json.dumps(self.most_profitable)
+        
         """
         while not self.loop():            
             self.counter += 1
