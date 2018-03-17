@@ -264,7 +264,8 @@ class WhatToMine:
             json_obj = {'coins': {}}
             print ("error")
 
-        return json_obj    
+        return json_obj["coins"]
+    
     def calculateMostProfitable(self, profitable_coins):
         most_profitable = {}
         if len(profitable_coins["coins"]) > 0:
