@@ -287,7 +287,7 @@ class WhatToMine:
             for key, val in profitable_coins.items():
                 profitable_sorted[key] = val[profitable_key]
 
-            x = sorted(profitable_sorted.items(), key=lambda (k,v): v[1], reverse=True)    
+            x = sorted(profitable_sorted.items(), key=operator.itemgetter(1), reverse=True)    
                     
         return x
     """
