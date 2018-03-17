@@ -241,6 +241,7 @@ class HiveAPI:
 class WhatToMine:
     counter = 0
     retry_limit = 5
+    most_profitable = {}
     
     def __init__(self):
         pass
@@ -310,8 +311,8 @@ class WhatToMine:
 	pid = self.checkExistingProcess()
 	self.__log("\nPID:" + str(pid))
 		
-        most_profitable = {}
-        most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
+        
+        
         success = False
 	print json.dumps(most_profitable, indent=3)        
 
@@ -327,14 +328,15 @@ class WhatToMine:
     
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
-        
+        self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
+        """
         while not self.loop():            
             self.counter += 1
             if self.counter >= self.retry_limit:
                 break
             sleep(5)
             self.run()
-            
+       """     
 w = WhatToMine()
 w.run()
 
