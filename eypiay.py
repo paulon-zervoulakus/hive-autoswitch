@@ -290,32 +290,7 @@ class WhatToMine:
             x = sorted(profitable_sorted.items(), key=operator.itemgetter(1), reverse=True)    
                     
         return x
-    """
-    def applyChanges(self, most_profitable):
-        hive_api = HiveAPI()
-        wallets = hive_api.getWallets()
-        wallet_id = null
-        coin_name = ""
-        
-        for key, val in wallets.items():           
-            if list(most_profitable.keys())[0] == val["name"]:                
-                wallet_id = val["id_wal"]
-                coin_name = val["name"]
-
-        if wallet_id > 0:
-            result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
-            
-            print "Changes has been applied."
-            print "Miner will now dig " + coin_name
-            print "Restarting Miner."
-
-            if result is None:
-                return False
-            else:
-                return True
-        else:
-            return False
-	"""
+   
     def applyChanges(self):
         hive_api = HiveAPI()
         wallets = hive_api.getWallets()
@@ -332,11 +307,18 @@ class WhatToMine:
             counter += 1
 
         if wallet_id > 0:
-            #result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
-            
+            result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+
+            logging.debug('Process ID: ' + str(self.checkExistingProcess()))
+            logging.debug('Date Time: ' + str(datetime.datetime.today()))
+            logging.debug('Coin Switch: ' + coin_name )
+            logging.debug('Rig IDs: ' + SOURCE["whattomine"]["rig_ids"])
+            logging.debug('Wallet ID: ' + str(wallet_id))
+                          
             print "Changes has been applied."
-            print "Miner will now dig : " + coin_name
+            print "Miner/s will now dig : " + coin_name
             print "Wallet ID : " + str(wallet_id)
+            print "Rig ID/s : " + SOURCE["whattomine"]["rig_ids"]
             print "Restarting Miner."
 
             if result is None:
@@ -347,26 +329,7 @@ class WhatToMine:
             return False
     def checkExistingProcess(self):
         return os.getpid()		
-    """
-    def loop(self):
-	pid = self.checkExistingProcess()
-	self.__log("\nPID:" + str(pid))
-		
-        
-        
-        success = False
-	print json.dumps(most_profitable, indent=3)        
-
-        if most_profitable is not None:        
-            success = self.applyChanges(most_profitable)
-
-        if success:
-            logging.debug('Process ID: ' + str(pid))
-            logging.debug('Date Time: ' + str(datetime.datetime.today()))
-            logging.debug('Coin Switch: ' + list(most_profitable.keys())[0])
-            
-        return success
-    """
+    
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         self.most_profitable = self.getProfitableCoins()
