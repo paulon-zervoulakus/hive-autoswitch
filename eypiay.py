@@ -322,6 +322,7 @@ class WhatToMine:
         wallet_id = null
         coin_name = ""
         counter = 0
+        result = None
         
         while counter < len(self.most_profitable_keys):
             for key, val in wallets.items():           
@@ -371,7 +372,7 @@ class WhatToMine:
         #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
         self.most_profitable_keys = list(self.most_profitable.keys())
-        #print json.dumps(self.most_profitable_keys)
+        print json.dumps(self.most_profitable_keys)
         
         while not self.applyChanges():            
             self.counter += 1
