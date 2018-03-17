@@ -278,6 +278,16 @@ class WhatToMine:
                         most_profitable[key] = val
         return most_profitable
 
+    def arangeProfitByKey(self, profitable_key, profitable_coins):
+        most_profitable = {}
+        if len(profitable_coins["coins"]) > 0:
+            for key, val in profitable_coins["coins"].items():
+                if len(most_profitable) <= 0:
+                    most_profitable[key] = val
+                else:
+                    
+                    
+        return most_profitable
     def applyChanges(self, most_profitable):
         hive_api = HiveAPI()
         wallets = hive_api.getWallets()
@@ -290,7 +300,6 @@ class WhatToMine:
                 coin_name = val["name"]
 
         if wallet_id > 0:
-            #Uncomment below line to apply changes to your hiveos farm
             result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
             
             print "Changes has been applied."
@@ -328,7 +337,9 @@ class WhatToMine:
     
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
-        self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
+        #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
+        self.most_profitable = self.getProfitableCoins()
+        
         print json.dumps(self.most_profitable)
         
         """
