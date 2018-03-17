@@ -281,6 +281,7 @@ class WhatToMine:
         return most_profitable
 
     def sortProfitableKey(self, profitable_key, profitable_coins):
+        import operator
         profitable_sorted = {}
         if len(profitable_coins) > 0:
             for key, val in profitable_coins.items():
