@@ -3,7 +3,8 @@
 
 '''
 
-Hive OS API usage example
+Hive-Autoswitch
+Ver. 2.0
 
 Install curl:
 apt-get install python-dev
