@@ -27,7 +27,7 @@ from CONFIG import *
 from time import sleep
 import logging
 
-LOG_FILENAME = '/home/user/hiveos/hive-autoswitch/autoswitch.log'
+LOG_FILENAME = os.getcwd() + '/autoswitch.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 argv = sys.argv
@@ -308,6 +308,16 @@ class WhatToMine:
             counter += 1
 
         if wallet_id > 0:
+            """
+            Sets parameters for rigs
+
+            @param rig_ids_str coma separated string with rig ids "1,2,3,4"
+            @param miner Miner to set. Leave it null if you do not want to change. "claymore", "claymore-z", "ewbf", ...
+            @param miner2 Second miner to set. Leave it null if you do not want to change. "0" - if you want to unset it.
+            @param id_wal ID of wallet. Leave it null if you do not want to change.
+            @param id_oc ID of OC profile. Leave it null if you do not want to change.
+            @return bool|mixed
+            """
             result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
 
             logging.debug('Process ID: ' + str(self.checkExistingProcess()))
