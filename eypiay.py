@@ -280,19 +280,25 @@ class WhatToMine:
                         most_profitable[key] = val
         return most_profitable
 
-    """def sortProfitableKey(self, profitable_key, profitable_coins):
-        profitable_key_sorted = {}
+    def sortProfitableKey(self, profitable_key, profitable_coins):
+        profitable_sorted = {}
+        _sorted = {}
         if len(profitable_coins) > 0:
             for key, val in profitable_coins.items():
-                if len(profitable_key_sorted) <= 0:
-                    profitable_key_sorted.append(key)
+                if len(profitable_sorted) <= 0:
+                    profitable_sorted[key] = val
                 else:
-                    if profitable_coins[list(profitable_coins.keys())[0]][profitable_key] < val[SOURCE["whattomine"]["profitable_key"]]:
+                    profitable_sorted[key] = val
+                    profitable_sorted = sorted(profitable_sorted.items(), key=lambda v: v[profitable_key])
+                    """for k, v in profitable_sorted.items():
+                        if val[profitable_key] <  profitable_sorted[k]["profitable_key"]:
+
+                        else:
                         del most_profitable[list(most_profitable.keys())[0]]
                         most_profitable[key] = val
-                    
-        return profitable_key_sorted
-    
+                    """
+        return profitable_sorted
+    """
     def applyChanges(self, most_profitable):
         hive_api = HiveAPI()
         wallets = hive_api.getWallets()
@@ -373,7 +379,7 @@ class WhatToMine:
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
-        #self.most_profitable_keys = self.sortProfitableKey(SORCE["whattomine"]["profitable_key"],self.most_profitable)
+        self.most_profitable_keys = self.sortProfitableKey(SORCE["whattomine"]["profitable_key"],self.most_profitable)
         
         print json.dumps(self.most_profitable)
         """
