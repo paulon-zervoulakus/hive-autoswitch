@@ -373,7 +373,7 @@ class WhatToMine:
         self.most_profitable = self.getProfitableCoins()
         self.most_profitable_keys = self.sortProfitableKey(SOURCE["whattomine"]["profitable_key"],self.most_profitable)
         
-        print json.dumps(self.most_profitable)
+        print json.dumps(self.most_profitable, indent = 4)
         """
         while not self.applyChanges():            
             self.counter += 1
