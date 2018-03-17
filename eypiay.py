@@ -336,8 +336,8 @@ class WhatToMine:
         self.most_profitable_keys = self.sortProfitableKey(self.most_profitable)
         
         #print json.dumps(self.most_profitable_keys, indent = 4)
-        
-        while not self.applyChanges():            
+        result = self.applyChanges()
+        while not result:            
             self.counter += 1
             if self.counter >= self.retry_limit:
                 break
