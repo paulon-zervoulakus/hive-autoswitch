@@ -316,22 +316,26 @@ class WhatToMine:
         else:
             return False
 	"""
-    def applyChanges(self, index = 0):
+    def applyChanges(self):
         hive_api = HiveAPI()
         wallets = hive_api.getWallets()
         wallet_id = null
         coin_name = ""
+        counter = 0
         
-        for key, val in wallets.items():           
-            if list(most_profitable.keys())[0] == val["name"]:                
-                wallet_id = val["id_wal"]
-                coin_name = val["name"]
+        while counter < len(self.most_profitable_keys):
+            for key, val in wallets.items():           
+                if self.most_profitable_keys[counter] == val["name"]:                
+                    wallet_id = val["id_wal"]
+                    coin_name = val["name"]
+            counter += 1
 
         if wallet_id > 0:
-            result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+            #result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
             
             print "Changes has been applied."
-            print "Miner will now dig " + coin_name
+            print "Miner will now dig : " + coin_name
+            print "Wallet ID : " + wallet_id
             print "Restarting Miner."
 
             if result is None:
@@ -367,15 +371,15 @@ class WhatToMine:
         #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
         self.most_profitable_keys = list(self.most_profitable.keys())
-        print json.dumps(self.most_profitable_keys)
-        """
+        #print json.dumps(self.most_profitable_keys)
+        
         while not self.applyChanges():            
             self.counter += 1
             if self.counter >= self.retry_limit:
                 break
             sleep(5)
             self.run()
-       """     
+            
 w = WhatToMine()
 w.run()
 
