@@ -280,17 +280,19 @@ class WhatToMine:
                         most_profitable[key] = val
         return most_profitable
 
-    def arangeProfitByKey(self, profitable_key, profitable_coins):
-        most_profitable = {}
-        if len(profitable_coins["coins"]) > 0:
-            for key, val in profitable_coins["coins"].items():
-                if len(most_profitable) <= 0:
-                    most_profitable[key] = val
+    """def sortProfitableKey(self, profitable_key, profitable_coins):
+        profitable_key_sorted = {}
+        if len(profitable_coins) > 0:
+            for key, val in profitable_coins.items():
+                if len(profitable_key_sorted) <= 0:
+                    profitable_key_sorted.append(key)
                 else:
-                    break
+                    if profitable_coins[list(profitable_coins.keys())[0]][profitable_key] < val[SOURCE["whattomine"]["profitable_key"]]:
+                        del most_profitable[list(most_profitable.keys())[0]]
+                        most_profitable[key] = val
                     
-        return most_profitable
-    """
+        return profitable_key_sorted
+    
     def applyChanges(self, most_profitable):
         hive_api = HiveAPI()
         wallets = hive_api.getWallets()
@@ -371,16 +373,17 @@ class WhatToMine:
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
-        self.most_profitable_keys = list(self.most_profitable.keys())
-        print json.dumps(self.most_profitable_keys)
+        #self.most_profitable_keys = self.sortProfitableKey(SORCE["whattomine"]["profitable_key"],self.most_profitable)
         
+        print json.dumps(self.most_profitable)
+        """
         while not self.applyChanges():            
             self.counter += 1
             if self.counter >= self.retry_limit:
                 break
             sleep(5)
             self.run()
-            
+           """ 
 w = WhatToMine()
 w.run()
 
