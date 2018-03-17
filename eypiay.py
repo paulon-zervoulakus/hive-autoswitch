@@ -335,7 +335,7 @@ class WhatToMine:
             
             print "Changes has been applied."
             print "Miner will now dig : " + coin_name
-            print "Wallet ID : " + wallet_id
+            print "Wallet ID : " + str(wallet_id)
             print "Restarting Miner."
 
             if result is None:
