@@ -287,7 +287,7 @@ class WhatToMine:
             for key, val in profitable_coins.items():
                 profitable_sorted[key] = val[profitable_key]
 
-            x = sorted(profitable_sorted.items(), key=operator.itemgetter(1), reverse=True)    
+            x = sorted(profitable_sorted.items(), key=lambda (k,v), reverse=True)    
                     
         return x
     """
@@ -324,7 +324,7 @@ class WhatToMine:
         counter = 0
         result = None
         
-        while counter < len(self.most_profitable_keys):
+        while counter < len(self.most_profitable_keys[0]):
             for key, val in wallets.items():           
                 if self.most_profitable_keys[counter] == val["name"]:                
                     wallet_id = val["id_wal"]
@@ -369,11 +369,10 @@ class WhatToMine:
     """
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
-        #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
         self.most_profitable_keys = self.sortProfitableKey(SOURCE["whattomine"]["profitable_key"],self.most_profitable)
         
-        print json.dumps(self.most_profitable_keys, indent = 4)
+        #print json.dumps(self.most_profitable_keys, indent = 4)
         """
         while not self.applyChanges():            
             self.counter += 1
@@ -381,7 +380,7 @@ class WhatToMine:
                 break
             sleep(5)
             self.run()
-           """ 
+           """
 w = WhatToMine()
 w.run()
 
