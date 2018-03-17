@@ -379,7 +379,7 @@ class WhatToMine:
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
-        self.most_profitable_keys = self.sortProfitableKey(SORCE["whattomine"]["profitable_key"],self.most_profitable)
+        self.most_profitable_keys = self.sortProfitableKey(SOURCE["whattomine"]["profitable_key"],self.most_profitable)
         
         print json.dumps(self.most_profitable)
         """
