@@ -282,22 +282,13 @@ class WhatToMine:
 
     def sortProfitableKey(self, profitable_key, profitable_coins):
         profitable_sorted = {}
-        _sorted = {}
         if len(profitable_coins) > 0:
             for key, val in profitable_coins.items():
-                if len(profitable_sorted) <= 0:
-                    profitable_sorted[key] = val
-                else:
-                    profitable_sorted[key] = val
-                    profitable_sorted = sorted(profitable_sorted.items(), key=lambda v: v[profitable_key])
-                    """for k, v in profitable_sorted.items():
-                        if val[profitable_key] <  profitable_sorted[k]["profitable_key"]:
+                profitable_sorted[key] = val[profitable_key]
 
-                        else:
-                        del most_profitable[list(most_profitable.keys())[0]]
-                        most_profitable[key] = val
-                    """
-        return profitable_sorted
+            x = sorted(profitable_sorted.items, key=operator.itemgetter(1), reverse=True)    
+                    
+        return x
     """
     def applyChanges(self, most_profitable):
         hive_api = HiveAPI()
