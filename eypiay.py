@@ -242,6 +242,7 @@ class WhatToMine:
     counter = 0
     retry_limit = 5
     most_profitable = {}
+    most_profitable_keys = []
     
     def __init__(self):
         pass
@@ -365,7 +366,8 @@ class WhatToMine:
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
-        print json.dumps(list(self.most_profitable.keys()))
+        self.most_profitable_keys = list(self.most_profitable.keys())
+        print json.dumps(self.most_profitable_keys)
         """
         while not self.applyChanges():            
             self.counter += 1
