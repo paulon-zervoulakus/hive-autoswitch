@@ -289,6 +289,7 @@ class WhatToMine:
                     break
                     
         return most_profitable
+    """
     def applyChanges(self, most_profitable):
         hive_api = HiveAPI()
         wallets = hive_api.getWallets()
@@ -313,10 +314,34 @@ class WhatToMine:
                 return True
         else:
             return False
-	
+	"""
+    def applyChanges(self, index = 0):
+        hive_api = HiveAPI()
+        wallets = hive_api.getWallets()
+        wallet_id = null
+        coin_name = ""
+        
+        for key, val in wallets.items():           
+            if list(most_profitable.keys())[0] == val["name"]:                
+                wallet_id = val["id_wal"]
+                coin_name = val["name"]
+
+        if wallet_id > 0:
+            result = hive_api.multiRocket(SOURCE["whattomine"]["rig_ids"], null, null, wallet_id, null)            
+            
+            print "Changes has been applied."
+            print "Miner will now dig " + coin_name
+            print "Restarting Miner."
+
+            if result is None:
+                return False
+            else:
+                return True
+        else:
+            return False
     def checkExistingProcess(self):
         return os.getpid()		
-	
+    """
     def loop(self):
 	pid = self.checkExistingProcess()
 	self.__log("\nPID:" + str(pid))
@@ -335,16 +360,14 @@ class WhatToMine:
             logging.debug('Coin Switch: ' + list(most_profitable.keys())[0])
             
         return success
-    
+    """
     def run(self):
         self.__log("\n=== Autoswitch Miner for Hiveos ===")
         #self.most_profitable = self.calculateMostProfitable(self.getProfitableCoins())
         self.most_profitable = self.getProfitableCoins()
-        
-        print json.dumps(self.most_profitable)
-        
+        print json_dumps(list(most_profitable.keys()))
         """
-        while not self.loop():            
+        while not self.applyChanges():            
             self.counter += 1
             if self.counter >= self.retry_limit:
                 break
