@@ -3,7 +3,7 @@
 This is a autoswitch of wallet based on whattomine most profitability
 Install the requirements below
 
-####Step 1 : Requirements - execute the command below from terminal
+#### Step 1 : Requirements - execute the command below from terminal
 
 `# apt-get install vim'
 
