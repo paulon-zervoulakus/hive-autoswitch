@@ -3,21 +3,21 @@
 This is a autoswitch of wallet based on whattomine most profitability
 Install the requirements below
 
-Step 1 : Requirements - execute the command below from terminal
+####Step 1 : Requirements - execute the command below from terminal
 
-\# apt-get install vim
+`# apt-get install vim'
 
-\# apt-get install git
+'# apt-get install git'
 
-\# apt-get install python-dev
+'# apt-get install python-dev'
 
-\# pip install certifi
+'# pip install certifi'
 
-\# pip install logging
+'# pip install logging'
 
-\# git clone git@github.com:paulon-zervoulakus/hive-autoswitch.git
+'# git clone git@github.com:paulon-zervoulakus/hive-autoswitch.git'
 
-\# cd hive-autoswitch && mv CONFIG.example.py CONFIG.py
+'# cd hive-autoswitch && mv CONFIG.example.py CONFIG.py`
 
 Step 2: File Permission - at the same directory of eypiay.py file execute the command below from terminal
 
